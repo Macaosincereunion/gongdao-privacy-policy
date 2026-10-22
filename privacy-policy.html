@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="index,follow">
+  <title>隐私政策 - 公道钟馗</title>
+  <style>
+    :root { color-scheme: dark; }
+    body { font-family: system-ui,-apple-system,"Microsoft YaHei",sans-serif; background:#0d1117; color:#e5d3b3; padding:1.25rem; line-height:1.8; max-width:860px; margin:0 auto; }
+    h1,h2 { color:#d4af37; } h1 { border-bottom:2px solid #5a0e0e; padding-bottom:.5rem; } h2 { margin-top:2rem; font-size:1.2rem; }
+    a { color:#8be0ff; overflow-wrap:anywhere; }
+    .en { border-top:1px solid #4a3018; margin-top:3rem; padding-top:1rem; color:#d2c6b0; }
+    .small { color:#b8a98e; font-size:.94rem; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>公道钟馗隐私政策</h1>
+    <p><strong>最近更新：</strong>2026年10月22日　<strong>生效日：</strong>2026年10月22日</p>
+
+    <p>本政策说明澳門至誠無間有限公司（下称“我们”）运营的“公道钟馗”（亦称“问道 APP 纯净版”，Android 应用包名 <code>com.gongdao.zhongkui</code>，下称“本应用”）如何处理信息。请在使用本应用前阅读本政策。本应用当前版本不提供我们自己的注册、登录或云端卦志账号。</p>
+
+    <h2>1. 我们处理哪些信息</h2>
+    <h3>1.1 保存在您设备上的内容</h3>
+    <p>当您使用本应用时，您选择或填写的问题、问题类别、卦象与解读结果、时间及相关摇卦记录会保存在本设备的应用存储空间（最多保留最近50条卦志）。本地还可能保存免费体验状态，以及用于验证已购权益的签名凭据缓存。上述卦志和状态不会由本应用上传到我们的权益服务。Android 版本关闭了应用备份及设备迁移备份；清除应用数据、卸载应用或更换设备可能造成这些内容丢失。</p>
+    <p>如您从较早版本升级，应用可能读取旧版本留在本机的历史记录以迁移卦志，随后移除旧版本的本地用户库、会话和旧购买标记；该迁移在设备上进行，不会把旧账号信息或密码发送给我们。当前版本不提供账号注册或登录。</p>
+
+    <h3>1.2 摄像头及手势识别</h3>
+    <p>只有当您主动选择“手势演卦”并授予摄像头权限时，本应用才启用摄像头。摄像头画面由随应用安装的 MediaPipe 模型在设备本机实时处理，用于识别手势；按当前版本实现，画面和手部关键点不会上传至我们的服务器、不会由我们保存，也不用于识别您的身份。退出手势模式、应用转入后台或撤销权限后，摄像头处理会停止。拒绝或撤销权限后，您仍可使用点击演卦模式。系统可能按其自身规则显示摄像头使用提示。</p>
+
+    <h3>1.3 Google Play 购买与权益验证</h3>
+    <p>购买由 Google Play Billing 处理。为验证、恢复并交付一次性商品“premium_unlock”，以及防止欺诈、处理退款或撤销，我们的应用会通过 HTTPS 将应用包名、商品 ID 和 Google Play 购买令牌发送至我们的 Cloud Run 权益验证服务。购买令牌是敏感的交易凭据：服务会在处理期间使用该令牌向 Google Play Developer API 查询并确认购买。我们不会把原始购买令牌写入 Firestore；服务端以带密钥的 HMAC 方式生成购买令牌和订单号的摘要，并记录商品、交易状态、权益结果、核验时间和到期时间等必要信息。摘要仍可能用于关联同一交易，不能视为完全匿名信息。</p>
+    <p>经核验的签名权益凭据会在本设备缓存，最长不超过72小时，之后需联网重新核验。我们不会收到您的 Google 账号密码、银行卡完整卡号或完整付款凭据；Google Play 会依其自己的隐私政策和服务条款处理您的账号、付款方式、账单及购买记录。</p>
+
+    <h3>1.4 连接与安全运行信息</h3>
+    <p>购买验证请求需要通过互联网发送。服务会在运行期间读取请求来源 IP 地址，用于限流和防止滥用。Google Cloud 的 Cloud Run / Cloud Logging 运行日志也可能处理来源 IP、请求路径、用户代理、HTTP 状态和时间等服务运行元数据。我们自行输出的错误日志仅记录固定事件名称、错误状态码和错误类型，不记录请求正文、购买令牌或卦志内容。当前生产项目中，Cloud Run 与 Firestore 位于 asia-east2；Cloud Logging 的 _Default 日志桶位于 global，保留30天，存放一般服务日志；_Required 日志桶位于 global，锁定保留400天，接收 Google 要求保留的审计日志。日志访问受 Google Cloud 项目权限控制。</p>
+
+    <h2>2. 使用目的</h2>
+    <ul>
+      <li>在设备本机提供演卦、手势识别、卦志查看和删除功能；</li>
+      <li>核验 Google Play 购买、交付或恢复付费权益，并处理退款、撤销及购买争议；</li>
+      <li>保护服务安全、限制异常请求、排查故障和维护系统；</li>
+      <li>遵守适用法律，或处理安全、欺诈及合法权利主张。</li>
+    </ul>
+    <p>本版本未集成第三方广告、行为分析或应用内崩溃分析 SDK；我们不会出售卦志、摄像头画面或购买信息，也不会将这些信息用于个性化广告。</p>
+
+    <h2>3. 信息接收方与共享</h2>
+    <ul>
+      <li><strong>Google Play / Google Play Billing：</strong>处理购买流程、账号付款及购买恢复。</li>
+      <li><strong>Google Play Developer API：</strong>由我们的服务用于验证和确认购买。Google 对其服务中处理的信息另行负责，详情见 <a href="https://policies.google.com/privacy">Google 隐私权政策</a>。</li>
+      <li><strong>Google Cloud：</strong>Cloud Run、Firestore、Pub/Sub 和 Cloud Logging 为购买核验、Google Play 实时开发者通知、数据库存储及服务安全日志提供基础设施。相关信息按生产项目配置由 Google Cloud 处理。</li>
+      <li><strong>您选择的系统分享应用：</strong>当您主动点击分享并选择接收应用时，系统分享面板会传递固定的应用介绍文字和 Google Play 商店链接；不会自动附带您的问题、卦志或摄像头画面。接收应用如何处理您主动分享的内容，由该应用提供者的政策决定。</li>
+    </ul>
+    <p>除上述服务、经您主动选择的分享、履行法律义务或保护用户及服务安全所必要的情形外，我们不会向其他方披露个人信息。服务可能由位于您所在地区以外的 Google 基础设施处理信息；实际数据存储地区以生产 Cloud 项目及相关服务配置为准。</p>
+
+    <h2>4. 保存期限与删除</h2>
+    <ul>
+      <li><strong>本机卦志：</strong>保留至您在应用中删除、清除应用数据或卸载应用；最多保存最近50条。Android 应用备份与设备迁移备份已关闭。</li>
+      <li><strong>本机权益凭据：</strong>签名权益缓存最长72小时，过期后须联网重新验证，或在无效时由应用移除。</li>
+      <li><strong>购买核验审计记录：</strong>当前生产服务配置为400天，从最近一次更新起计；仅在格式有效的令牌经 Google Play API 明确返回无效（HTTP 400、404或410）时，相关记录设置为7天。</li>
+      <li><strong>Google Play 实时通知去重记录：</strong>当前生产配置最长90天；<strong>临时核验协调记录：</strong>当前生产配置最长1天，部分记录会提前清除。</li>
+      <li>生产 Firestore 数据库位于 asia-east2，以上三个集合组的 <code>expireAt</code> TTL 规则均已启用。到期清理由 Google Cloud TTL 异步执行，实际删除时间可能晚于上述到期时间；若生产配置变更，我们会相应更新本政策。</li>
+      <li><strong>运行日志：</strong>当前生产项目的 Cloud Logging _Default 桶保留30天；_Required 桶锁定保留400天，按 Google 的日志路由规则用于必需审计日志。两个桶位于 global。若 Google Cloud 日志路由或桶设置变更，我们会重新评估本政策。</li>
+    </ul>
+
+    <h2>5. 您的选择与隐私权利</h2>
+    <p>您可以拒绝或在 Android 系统设置中撤销摄像头权限；删除本机卦志可在“设置与说明 &gt; 本机数据 &gt; 删除本机全部卦志”操作，也可通过清除应用数据或卸载应用删除本地内容。删除卦志不会自动重置购买权益或免费体验状态。</p>
+    <p>如需就服务端购买核验记录提出查阅、更正或删除请求，请联系下方邮箱。为定位交易，我们可能请您提供 Google Play 订单编号或其他最低限度的交易信息；请勿发送 Google 账号密码、完整银行卡号或购买令牌。我们会按适用法律处理请求；因防欺诈、交易争议或法律义务需要保留的记录，以及已经进入平台运行日志或异步删除流程的信息，可能无法立即或全部删除。当前应用没有自助删除服务器购买记录或删除账号功能，因为本应用不提供自有账号。</p>
+
+    <h2>6. 安全措施</h2>
+    <p>购买核验通过 HTTPS 传输；原始购买令牌仅在核验处理中使用，持久化的交易标识采用带密钥的摘要形式。服务凭据由服务端环境管理，不应放入客户端。我们采取与数据用途相适应的访问控制和安全措施，但互联网传输及电子存储不存在绝对安全保证。</p>
+
+    <h2>7. 儿童及年龄</h2>
+    <p>本应用在 Google Play 中按18岁及以上用户设置目标受众，不以18岁以下人士为目标用户；应用本身不进行身份或年龄核验。若您认为未成年人向我们提交了购买支持信息，请通过下方联系方式与我们联系，我们会按适用法律处理。</p>
+
+    <h2>8. 政策更新</h2>
+    <p>当应用功能、数据处理方式、服务提供商或适用要求发生变化时，我们会更新本政策并修改“最近更新”日期。重要变更会通过应用页面、商店信息或其他适当方式告知。更新后的政策自页面注明的日期起适用。</p>
+
+    <h2>9. 联系我们</h2>
+    <p>运营主体：澳門至誠無間有限公司<br>隐私请求邮箱：<a href="mailto:gongdaozhongkui@sincereunion.club">gongdaozhongkui@sincereunion.club</a></p>
+    <p><a href="https://macaosincereunion.github.io/gongdao-privacy-policy/terms.html">查看服务条款与免责声明</a></p>
+    <p class="small">本政策未公开登记住所。</p>
+  </main>
+
+  <section class="en" lang="en">
+    <h1>Privacy Policy — Gongdao Zhongkui</h1>
+    <p><strong>Last updated:</strong> October 22, 2026. <strong>Effective date:</strong> October 22, 2026.</p>
+    <p>This policy describes how 澳門至誠無間有限公司 (“we”) handles information in “Gongdao Zhongkui” (also referred to as “Wendao App Pure Version”; Android package name <code>com.gongdao.zhongkui</code>, the “App”). The current version does not provide our own registration, login or cloud-history account.</p>
+
+    <h2>1. Information we process</h2>
+    <h3>1.1 Information stored on your device</h3>
+    <p>Questions you select or enter, categories, divination results and interpretations, timestamps and related history are stored in the App’s local storage (up to the latest 50 records). The device may also store trial status and a signed credential cache used to validate a purchase entitlement. The App does not upload this history or status to our entitlement service. Android app backup and device-transfer backup are disabled. Clearing app data, uninstalling the App or changing devices may cause this information to be lost.</p>
+    <p>If you upgrade from an older version, the App may read locally stored legacy history to migrate it, and then remove the legacy local user database, session and old purchase flag. This migration occurs on your device; legacy account information or passwords are not sent to us. The current version does not offer account registration or login.</p>
+    <h3>1.2 Camera and gesture recognition</h3>
+    <p>The camera is enabled only if you choose gesture divination and grant camera permission. MediaPipe models packaged with the App process camera frames on your device in real time to recognize gestures. Under the current implementation, frames and hand landmarks are not uploaded to our servers, are not retained by us, and are not used to identify you. Camera processing stops when you leave gesture mode, the App goes into the background, or permission is revoked. Click-based divination remains available if you deny or revoke permission.</p>
+    <h3>1.3 Google Play purchases and entitlement verification</h3>
+    <p>Google Play Billing handles purchases. To verify, restore and deliver the one-time product “premium_unlock”, and to prevent fraud or address refunds and revocations, the App sends the package name, product ID and Google Play purchase token over HTTPS to our Cloud Run entitlement service. A purchase token is a sensitive transaction credential. While processing it, the service uses it to query and acknowledge the purchase through the Google Play Developer API. We do not write the raw token to Firestore. We store keyed HMAC digests of the purchase token and order ID, along with necessary product, transaction-status, entitlement-result, verification-time and expiration information. These digests may still link records to the same transaction and are not fully anonymous.</p>
+    <p>A signed entitlement credential may be cached on the device for no more than 72 hours, after which online verification is required. We do not receive your Google account password, full card number or complete payment credentials. Google Play handles your account, payment method, billing and purchase records under its own privacy policy and terms.</p>
+    <h3>1.4 Connection and service-security information</h3>
+    <p>The purchase-verification request requires an internet connection. The service reads the request source IP address at runtime for rate limiting and abuse prevention. Google Cloud Run / Cloud Logging operational logs may also process metadata such as source IP, request path, user agent, HTTP status and timing. Our application-generated error logs contain only fixed event names, status codes and error types; they do not record request bodies, purchase tokens or divination history. In the current production project, Cloud Run and Firestore are in asia-east2. The Cloud Logging _Default bucket is in global and retains general service logs for 30 days; the locked _Required bucket is in global and retains required audit logs for 400 days. Log access is controlled by Google Cloud project permissions.</p>
+
+    <h2>2. How we use information</h2>
+    <ul>
+      <li>Provide on-device divination, gesture recognition, history viewing and deletion;</li>
+      <li>Verify Google Play purchases, deliver or restore entitlements, and address refunds, revocations and purchase disputes;</li>
+      <li>Secure the service, limit abnormal requests, troubleshoot and maintain systems; and</li>
+      <li>Comply with applicable law or address security, fraud or legal claims.</li>
+    </ul>
+    <p>This version does not include third-party advertising, behavioral analytics or in-app crash analytics SDKs. We do not sell divination history, camera frames or purchase information, or use them for personalized advertising.</p>
+
+    <h2>3. Recipients and sharing</h2>
+    <ul>
+      <li><strong>Google Play / Google Play Billing:</strong> processes purchases, account payments and purchase restoration.</li>
+      <li><strong>Google Play Developer API:</strong> used by our service to verify and acknowledge purchases. See <a href="https://policies.google.com/privacy">Google’s Privacy Policy</a>.</li>
+      <li><strong>Google Cloud:</strong> Cloud Run, Firestore, Pub/Sub and Cloud Logging provide infrastructure for purchase verification, Google Play real-time developer notifications, database storage and service-security logs. Google processes relevant information under the production project configuration.</li>
+      <li><strong>System share apps you choose:</strong> if you explicitly choose to share, the system share sheet passes fixed promotional text and the Google Play listing link to the selected app. Your question, history and camera frames are not automatically attached. The receiving app’s provider governs its handling of content you choose to share.</li>
+    </ul>
+    <p>Other than these services, a share you choose, legal requirements or what is necessary to protect users and the service, we do not disclose personal information to other parties. The current production Cloud Run service and Firestore database are located in asia-east2. Cloud Logging buckets are in the global location. Google infrastructure may process information outside your jurisdiction.</p>
+
+    <h2>4. Retention and deletion</h2>
+    <ul>
+      <li><strong>Local history:</strong> until you delete it in the App, clear app data or uninstall; up to 50 records. Android app backup and device-transfer backup are disabled.</li>
+      <li><strong>Local entitlement credential:</strong> no more than 72 hours, after which online re-verification is required; invalid credentials may be removed earlier.</li>
+      <li><strong>Purchase-verification audit records:</strong> the current production service is configured for 400 days after the latest update. A record for a well-formed token is set to 7 days only when Google Play API explicitly rejects it as invalid (HTTP 400, 404 or 410).</li>
+      <li><strong>Google Play notification deduplication records:</strong> up to 90 days under current production configuration. <strong>Temporary verification-coordination records:</strong> up to one day and some may be cleared earlier.</li>
+      <li>The production Firestore database is in asia-east2, and TTL policies for all three collection groups using <code>expireAt</code> are active. Firestore TTL deletion is asynchronous, so actual deletion may occur after the stated expiration. We will update this policy if the production settings change.</li>
+      <li><strong>Operational logs:</strong> the current production Cloud Logging _Default bucket retains general service logs for 30 days. The locked _Required bucket retains required audit logs for 400 days. Both buckets are in global. We will reassess this policy if Google Cloud log routing or bucket settings change.</li>
+    </ul>
+
+    <h2>5. Your choices and privacy rights</h2>
+    <p>You can deny or revoke camera permission in Android settings. Delete local history under “Settings &amp; Guide &gt; On-device data &gt; Delete all local history”, or clear app data/uninstall the App. Deleting history does not automatically reset purchase entitlement or trial status.</p>
+    <p>To request access to, correction of or deletion of server-side purchase-verification records, contact the email below. We may ask for a Google Play order number or the minimum transaction information needed to locate a record. Do not send your Google password, full card number or purchase token. We will handle requests under applicable law. Records needed for fraud prevention, transaction disputes or legal obligations, and information already in platform logs or an asynchronous deletion process, may not be immediately or completely removable. The App has no self-service deletion of server purchase records or account-deletion feature because it does not provide its own accounts.</p>
+
+    <h2>6. Security</h2>
+    <p>Purchase verification uses HTTPS. Raw purchase tokens are used during verification, while persistent transaction identifiers are stored as keyed digests. Service credentials are managed in the server environment and should not be placed in the client. We use security measures appropriate to the purposes, but no internet transmission or electronic storage method is completely secure.</p>
+
+    <h2>7. Children and age</h2>
+    <p>The App’s Google Play target audience is set to users aged 18 and over and the App is not directed to people under 18. The App itself does not verify identity or age. If you believe a minor has sent us purchase-support information, contact us below and we will handle it as required by applicable law.</p>
+
+    <h2>8. Changes to this policy</h2>
+    <p>We will update this policy when App features, data handling, service providers or applicable requirements change, and revise the “Last updated” date. Significant changes may be communicated through the App, store listing or other appropriate means. Changes apply from the date stated on the page.</p>
+
+    <h2>9. Contact</h2>
+    <p>Operator: 澳門至誠無間有限公司<br>Privacy requests: <a href="mailto:gongdaozhongkui@sincereunion.club">gongdaozhongkui@sincereunion.club</a></p>
+    <p><a href="https://macaosincereunion.github.io/gongdao-privacy-policy/terms.html">Terms of Service and Disclaimer</a></p>
+    <p class="small">The registered office address is not included in this policy.</p>
+  </section>
+</body>
+</html>
